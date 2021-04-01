@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+</head>
+<body>
+<p>{{ type | upper }}</p>
+
+<ul>
+    {% for book in books %}
+        <li>{{ book.title }} {% if book.subtitle %}- {{ book.subtitle }} {% endif %}</li>
+        <li>{{ book.authors }}</li>
+        {% if book.short_description %}
+            <li>{{ book.short_description | truncatewords:10 }}</li>
+        {% endif %}
+        <li>{{ book.isbn }} - {{ book.language }}</li>
+        <li>{{ book.publishedDate }} - {{ book.publisher }}</li>
+        <li>{{ book.category }}</li>
+        <li>{{ book.long_description | truncatewords:50 }}</li>
+        <img src="{{ book.cover }}" width="100"/>
+        <li>${{ book.price }}</li>
+        <li>{{ book.format }} - {{ book.pageCount }}</li>
+        {% if book.specials.all %}
+            <li>{{ book.specials.all|join:" and " }}</li>
+        {% endif %}
+        <br>
+        <hr>
+    {% endfor %}
+</ul>
+</body>
+</html>
